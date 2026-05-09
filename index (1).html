@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Villa Monfalcone — Verona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --terracotta: #c2714f;
+      --terracotta-dark: #a05a39;
+      --gold: #b8956a;
+      --gold-light: #d4b896;
+      --charcoal: #2c2420;
+      --charcoal-light: #4a3f3a;
+      --muted: #8a7a72;
+      --border: rgba(184,149,106,0.25);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--charcoal); text-decoration: none;
+    }
+    .nav-logo span { color: var(--terracotta); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--charcoal-light);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-cta {
+      background: var(--terracotta); color: #fff;
+      border: none; padding: 0.65rem 1.6rem;
+      font-family: 'Jost', sans-serif; font-size: 0.72rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.25s;
+    }
+    .nav-cta:hover { background: var(--terracotta-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 5rem 6rem 4rem;
+      background: var(--cream);
+      position: relative;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute; top: 15%; right: -1px; width: 1px; height: 70%;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 2rem; height: 1px; background: var(--terracotta);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--charcoal);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--terracotta); }
+    .hero-desc {
+      font-size: 0.95rem; font-weight: 300; line-height: 1.9;
+      color: var(--muted); max-width: 38ch; margin-bottom: 3rem;
+    }
+    .hero-btns { display: flex; gap: 1.2rem; align-items: center; }
+    .btn-primary {
+      background: var(--terracotta); color: #fff; border: none;
+      padding: 0.9rem 2.4rem; font-family: 'Jost', sans-serif;
+      font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.25s; text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      color: var(--charcoal-light); font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--terracotta); }
+    .btn-secondary::after { content: '→'; }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%; min-height: 600px;
+      background: linear-gradient(135deg, #d4c4b0 0%, #b8a898 40%, #9a8878 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; color: rgba(255,255,255,0.6);
+    }
+    .hero-img-placeholder svg { width: 48px; opacity: 0.5; }
+    .hero-img-placeholder p { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .hero-badge {
+      position: absolute; bottom: 2rem; left: 2rem;
+      background: rgba(250,248,244,0.95); backdrop-filter: blur(8px);
+      padding: 1.2rem 1.8rem; border-left: 3px solid var(--terracotta);
+    }
+    .hero-badge-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600;
+      color: var(--terracotta); line-height: 1;
+    }
+    .hero-badge-text {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); margin-top: 0.3rem;
+    }
+
+    /* ── STRIP ── */
+    .strip {
+      background: var(--charcoal); color: var(--gold-light);
+      display: flex; align-items: center; justify-content: center; gap: 4rem;
+      padding: 1.2rem 4rem;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .strip-item { display: flex; align-items: center; gap: 0.7rem; }
+    .strip-item svg { width: 16px; opacity: 0.7; flex-shrink: 0; }
+    .strip-divider { width: 1px; height: 1.2rem; background: rgba(255,255,255,0.2); }
+
+    /* ── ABOUT ── */
+    .section { padding: 8rem 4rem; }
+    .about { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+    .about-imgs { position: relative; height: 560px; }
+    .about-img-main {
+      position: absolute; top: 0; left: 0;
+      width: 72%; height: 78%;
+      object-fit: cover;
+    }
+    .about-img-main-placeholder {
+      position: absolute; top: 0; left: 0;
+      width: 72%; height: 78%;
+      background: linear-gradient(135deg, #c4b4a0 0%, #a89888 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .about-img-accent {
+      position: absolute; bottom: 0; right: 0;
+      width: 52%; height: 55%;
+      border: 6px solid var(--warm-white);
+      object-fit: cover;
+    }
+    .about-img-accent-placeholder {
+      position: absolute; bottom: 0; right: 0;
+      width: 52%; height: 55%;
+      border: 6px solid var(--warm-white);
+      background: linear-gradient(135deg, #b8a090 0%, #9a8070 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5); font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .about-decor {
+      position: absolute; top: 40%; left: 60%;
+      width: 80px; height: 80px;
+      border: 1px solid var(--gold-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--warm-white);
+      font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+      z-index: 2;
+    }
+
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before { content: ''; width: 1.5rem; height: 1px; background: var(--terracotta); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.15;
+      color: var(--charcoal); margin-bottom: 1.8rem;
+    }
+    .section-title em { font-style: italic; }
+    .section-text {
+      font-size: 0.93rem; font-weight: 300; line-height: 1.9;
+      color: var(--muted); margin-bottom: 1.4rem;
+    }
+    .detail-row {
+      display: flex; gap: 2rem; margin-top: 2.5rem;
+      border-top: 1px solid var(--border); padding-top: 2rem;
+    }
+    .detail-item { }
+    .detail-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
+      font-weight: 300; color: var(--terracotta); line-height: 1;
+    }
+    .detail-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+    /* ── SERVICES ── */
+    .services-section { background: var(--cream); }
+    .services-header { text-align: center; margin-bottom: 5rem; }
+    .services-header .section-label { justify-content: center; }
+    .services-header .section-label::before { display: none; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .service-card {
+      padding: 3.5rem 3rem; border: 1px solid var(--border);
+      transition: all 0.35s; position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--terracotta);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { background: #fff; transform: translateY(-4px); box-shadow: 0 16px 40px rgba(44,36,32,0.08); }
+    .service-icon {
+      width: 48px; height: 48px; margin-bottom: 2rem;
+      color: var(--gold);
+    }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+      font-weight: 400; color: var(--charcoal); margin-bottom: 1rem;
+    }
+    .service-text { font-size: 0.88rem; font-weight: 300; line-height: 1.85; color: var(--muted); }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 260px 260px;
+      gap: 6px;
+    }
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; display: block; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item-ph {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .gi-1 { grid-column: 1 / 3; grid-row: 1; background: linear-gradient(135deg, #c4b0a0, #a89080); }
+    .gi-2 { grid-column: 3; grid-row: 1; background: linear-gradient(135deg, #b0a898, #988878); }
+    .gi-3 { grid-column: 4; grid-row: 1; background: linear-gradient(135deg, #baa898, #a08878); }
+    .gi-4 { grid-column: 1; grid-row: 2; background: linear-gradient(135deg, #b8a898, #9a8878); }
+    .gi-5 { grid-column: 2; grid-row: 2; background: linear-gradient(135deg, #c0b0a0, #a89080); }
+    .gi-6 { grid-column: 3 / 5; grid-row: 2; background: linear-gradient(135deg, #c8b8a8, #b0988a); }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--charcoal); color: var(--cream);
+      display: grid; grid-template-columns: 1fr 1fr; min-height: 500px;
+    }
+    .contact-left {
+      padding: 7rem 5rem; display: flex; flex-direction: column; justify-content: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .contact-left .section-label { color: var(--gold-light); }
+    .contact-left .section-label::before { background: var(--gold-light); }
+    .contact-left .section-title { color: var(--cream); }
+    .contact-items { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+    .contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .contact-icon { color: var(--terracotta); margin-top: 2px; flex-shrink: 0; }
+    .contact-item-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.4rem; }
+    .contact-item-val { font-size: 1rem; font-weight: 300; color: var(--cream); }
+    .contact-item-val a { color: inherit; text-decoration: none; }
+    .contact-item-val a:hover { color: var(--gold-light); }
+
+    .contact-right {
+      padding: 7rem 5rem; display: flex; flex-direction: column; justify-content: center;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-light); }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      color: var(--cream); padding: 0.85rem 1rem;
+      font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 300;
+      transition: border-color 0.2s; outline: none;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--terracotta); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-submit {
+      background: var(--terracotta); color: #fff; border: none;
+      padding: 1rem 2.5rem; font-family: 'Jost', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.25s; align-self: flex-start; margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--terracotta-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1e1a17; color: var(--muted);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2rem 4rem; font-size: 0.72rem; letter-spacing: 0.1em;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem;
+      color: var(--cream);
+    }
+    .footer-logo span { color: var(--terracotta); }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 0.8s forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 4rem 2rem; }
+      .hero-right { min-height: 60vw; }
+      .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+      .about-imgs { height: 360px; margin-bottom: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gi-1, .gi-6 { grid-column: auto; }
+      .contact-section { grid-template-columns: 1fr; }
+      .contact-left, .contact-right { padding: 4rem 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .section { padding: 5rem 1.5rem; }
+      .strip { gap: 1.5rem; padding: 1rem; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Villa <span>Monfalcone</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">La Struttura</a></li>
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#galleria">Galleria</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contatti').scrollIntoView({behavior:'smooth'})">Prenota Ora</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow fade-up">Verona, Italia</p>
+    <h1 class="hero-title fade-up delay-1">
+      Un soggiorno<br><em>indimenticabile</em><br>nel cuore di Verona
+    </h1>
+    <p class="hero-desc fade-up delay-2">
+      Appartamenti eleganti e camere curate nel cuore della città dell'amore. Un'esperienza unica tra storia, cultura e comfort moderno.
+    </p>
+    <div class="hero-btns fade-up delay-3">
+      <a href="#contatti" class="btn-primary">Scopri i Soggiorni</a>
+      <a href="#about" class="btn-secondary">La Nostra Storia</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="img1.jpg" alt="Villa Monfalcone Verona" class="hero-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+    <div class="hero-img-placeholder" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <p>img1.jpg</p>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">★ 4.9</div>
+      <div class="hero-badge-text">Recensioni Ospiti</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Check-in Flessibile
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    Disponibile 24/7
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Via Monfalcone 11, Verona
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.17 3.4a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.88a16 16 0 0 0 6 6l.61-.61a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.14 17l-.22-.08z"/></svg>
+    348 737 6776
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about">
+    <div class="about-imgs">
+      <img src="img2.jpg" alt="Interno appartamento" class="about-img-main" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div class="about-img-main-placeholder" style="display:none;">img2.jpg</div>
+      <div class="about-img-accent-placeholder">Verona</div>
+      <div class="about-decor">Verona</div>
+    </div>
+    <div>
+      <p class="section-label">Chi Siamo</p>
+      <h2 class="section-title">
+        Benvenuti nella <em>nostra</em><br>casa di Verona
+      </h2>
+      <p class="section-text">
+        Villa Monfalcone è un raffinato B&B e appartamento turistico situato in Via Monfalcone 11, nel cuore di Verona. Un luogo dove la storia millenaria della città si fonde con il comfort contemporaneo.
+      </p>
+      <p class="section-text">
+        Ogni spazio è stato curato nei minimi dettagli per offrirti un'esperienza autentica: dall'arredamento elegante ai servizi esclusivi, per rendere il tuo soggiorno indimenticabile.
+      </p>
+      <div class="detail-row">
+        <div class="detail-item">
+          <div class="detail-num">5</div>
+          <div class="detail-label">Camere & Appartamenti</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-num">10+</div>
+          <div class="detail-label">Anni di Ospitalità</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-num">500+</div>
+          <div class="detail-label">Ospiti Soddisfatti</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIZI -->
+<section class="section services-section" id="servizi">
+  <div class="services-header">
+    <p class="section-label">I Nostri Servizi</p>
+    <h2 class="section-title">Tutto il necessario<br>per il <em>tuo comfort</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <h3 class="service-title">Appartamenti Completi</h3>
+      <p class="service-text">Spazi indipendenti e confortevoli, ideali per famiglie o coppie in cerca di privacy e autonomia. Cucina attrezzata e tutti i comfort di casa.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+      </svg>
+      <h3 class="service-title">Colazione Inclusa</h3>
+      <p class="service-text">Inizia la giornata con una ricca colazione italiana preparata con prodotti locali e freschi. Un piacere da gustare ogni mattina.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <h3 class="service-title">Posizione Centrale</h3>
+      <p class="service-text">A pochi passi dall'Arena di Verona, dalla Casa di Giulietta e dai migliori ristoranti. La città è tutta a portata di mano.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="1" y="6" width="22" height="13" rx="2" ry="2"/><path d="M1 10h22"/>
+      </svg>
+      <h3 class="service-title">Wi-Fi Gratuito</h3>
+      <p class="service-text">Connessione internet ad alta velocità in tutta la struttura. Lavora o esplora la rete senza pensieri durante tutto il soggiorno.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <h3 class="service-title">Check-in Flessibile</h3>
+      <p class="service-text">Orari di arrivo e partenza adattabili alle tue esigenze. Il tuo comfort è la nostra priorità, sempre disponibili ad accoglierti.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <h3 class="service-title">Ospitalità Italiana</h3>
+      <p class="service-text">Un'accoglienza calorosa e personalizzata. Siamo qui per consigliarti sui migliori luoghi da visitare e rendere il tuo soggiorno perfetto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERIA -->
+<section class="section" id="galleria" style="padding-bottom: 0;">
+  <div style="text-align:center; margin-bottom: 3.5rem;">
+    <p class="section-label" style="justify-content:center; display:flex;">Galleria</p>
+    <h2 class="section-title">I Nostri <em>Spazi</em></h2>
+  </div>
+</section>
+<div class="gallery-grid">
+  <div class="gallery-item gi-1"><div class="gallery-item-ph">Soggiorno</div></div>
+  <div class="gallery-item gi-2"><div class="gallery-item-ph">Camera</div></div>
+  <div class="gallery-item gi-3"><div class="gallery-item-ph">Bagno</div></div>
+  <div class="gallery-item gi-4"><div class="gallery-item-ph">Cucina</div></div>
+  <div class="gallery-item gi-5"><div class="gallery-item-ph">Terrazzo</div></div>
+  <div class="gallery-item gi-6"><div class="gallery-item-ph">Vista Verona</div></div>
+</div>
+
+<!-- CONTATTI -->
+<section class="contact-section" id="contatti">
+  <div class="contact-left">
+    <p class="section-label">Contattaci</p>
+    <h2 class="section-title">Prenota il tuo<br><em>soggiorno</em></h2>
+    <div class="contact-items">
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.17 3.4a2 2 0 0 1 1.99-2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.88a16 16 0 0 0 6 6l.61-.61a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.14 17l-.22-.08z"/>
+        </svg>
+        <div>
+          <div class="contact-item-label">Telefono</div>
+          <div class="contact-item-val"><a href="tel:+393487376776">348 737 6776</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        <div>
+          <div class="contact-item-label">Indirizzo</div>
+          <div class="contact-item-val">Via Monfalcone, 11<br>37135 Verona VR</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <svg class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <div>
+          <div class="contact-item-label">Orari Disponibilità</div>
+          <div class="contact-item-val">Tutti i giorni · 08:00 – 21:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <p class="section-label" style="color: var(--gold-light);">Richiesta di Prenotazione</p>
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--cream); margin-bottom:2rem;">Scrivici un messaggio</h3>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Nome</label>
+          <input class="form-input" type="text" placeholder="Il tuo nome"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cognome</label>
+          <input class="form-input" type="text" placeholder="Il tuo cognome"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="email@esempio.it"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Check-in</label>
+          <input class="form-input" type="date"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Check-out</label>
+          <input class="form-input" type="date"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Messaggio</label>
+        <textarea class="form-textarea" rows="3" placeholder="Numero di ospiti, richieste speciali..."></textarea>
+      </div>
+      <button class="form-submit">Invia Richiesta</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Villa <span>Monfalcone</span></span>
+  <span>© 2024 Villa Monfalcone · Via Monfalcone, 11 · 37135 Verona VR</span>
+  <span>P.IVA · Tutti i diritti riservati</span>
+</footer>
+
+</body>
+</html>
